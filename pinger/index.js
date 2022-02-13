@@ -4,10 +4,21 @@ const { default: Queue } = require("./queue");
 
 const config = {
   host: process.env.HOST || "1.1.1.1",
-  port: process.env.PORT || 8080,
+  port: process.env.PORT || 2323,
   interval: process.env.INTERVAL || 1000,
   pingAmountForAverage: process.env.PING_AMOUNT_FOR_AVERAGE || 20,
 };
+
+if (process.env.INTERVAL) {
+  config.interval = Number.parseInt(process.env.INTERVAL, 10);
+}
+
+if (process.env.PING_AMOUNT_FOR_AVERAGE) {
+  config.pingAmountForAverage = Number.parseInt(
+    process.env.PING_AMOUNT_FOR_AVERAGE,
+    10
+  );
+}
 
 console.log(config);
 

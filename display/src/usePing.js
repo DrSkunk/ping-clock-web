@@ -1,5 +1,5 @@
 import { useRef, useEffect, useState } from "react";
-export default function usePing() {
+export default function usePing(uri) {
   const ws = useRef(null);
   const [ping, setPing] = useState(null);
   const [average, setAverage] = useState(null);
@@ -8,6 +8,7 @@ export default function usePing() {
 
   const parseMessage = (message) => {
     const data = JSON.parse(message.data);
+    console.log("received", data);
     if (data.type === "ping") {
       setPing(data.message.ms);
       setPacketLoss(false);
@@ -20,7 +21,8 @@ export default function usePing() {
   };
 
   function connect() {
-    ws.current = new WebSocket("ws://localhost:8080");
+    console.log("connecting to", uri);
+    ws.current = new WebSocket(uri);
     ws.current.onopen = () => {
       console.log("Connected");
     };
@@ -52,6 +54,5 @@ export default function usePing() {
   useEffect(() => {
     return connect();
   }, []);
-  console.log([ping, average, packetLoss, error]);
   return [ping, average, packetLoss, error];
 }

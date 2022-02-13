@@ -4,18 +4,16 @@ services:
     build: "./display"
     restart: unless-stopped
     ports:
-      - "80:${DISPLAY_PORT}"
-    environments:
-      - SERVER_IP=127.0.0.1
-      - DISPLAY_PORT=${SERVER_PORT}
+      - ${DISPLAY_PORT}:80
+    environment:
+      - VITE_SERVER_URI=${SERVER_URI}
 
-    pinger:
-      build: "./pinger"
-      restart: unless-stopped
-      ports:
-        - "${SERVER_PORT}:${SERVER_PORT}"
-      environments:
-        - HOST=1.1.1.1
-        - PORT=${SERVER_PORT},
-        - INTERVAL=1000
-        - PING_AMOUNT_FOR_AVERAGE=20
+  pinger:
+    build: "./pinger"
+    restart: unless-stopped
+    ports:
+      - ${SERVER_PORT}:2323
+    environment:
+      - HOST=1.1.1.1
+      - INTERVAL=1000
+      - PING_AMOUNT_FOR_AVERAGE=20
