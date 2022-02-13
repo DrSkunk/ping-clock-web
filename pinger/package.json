@@ -1,0 +1,17 @@
+{
+  "name": "ping-clock-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Sebastiaan Jansen - DrSkunk",
+  "license": "ISC",
+  "dependencies": {
+    "ping-lite": "^2.0.2",
+    "ws": "^8.5.0"
+  }
+}
