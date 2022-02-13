@@ -1,6 +1,6 @@
 const { WebSocketServer } = require("ws");
 const Ping = require("ping-lite");
-const { default: Queue } = require("./queue");
+const { default: Queue } = require("./Queue");
 
 const config = {
   host: process.env.HOST || "1.1.1.1",
